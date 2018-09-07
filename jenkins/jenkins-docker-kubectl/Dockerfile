@@ -1,7 +1,7 @@
 FROM openjdk:8-jre
 
-ADD sources.list /etc/apt/sources.list
-RUN curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg |  apt-key add -
+#ADD sources.list /etc/apt/sources.list
+#RUN curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg |  apt-key add -
 RUN apt-get update && apt-get install -y git curl docker-ce && rm -rf /var/lib/apt/lists/*
 
 ENV DOCKER_COMPOSE_VERSION=1.22.0
