@@ -1,0 +1,5 @@
+deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib
+deb http://mirrors.aliyun.com/debian-security stretch/updates main
+deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib
+deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib
+deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/debian/ stretch stable
