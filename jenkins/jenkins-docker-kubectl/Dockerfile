@@ -1,11 +1,12 @@
 FROM openjdk:8-jre
 
-#ADD sources.list /etc/apt/sources.list
-#RUN curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg |  apt-key add -
-RUN apt-get update && apt-get install -y git curl docker-ce && rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+ENV DOCKER_VERSION=18.06.1-ce
 ENV DOCKER_COMPOSE_VERSION=1.22.0
 ENV KUBECTL_VERSION=v1.11.1
+RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz -o docker-${DOCKER_VERSION}.tgz \
+		&& tar --strip-components=1 -xvzf docker-${DOCKER_VERSION}.tgz -C /usr/local/bin \
+		&& chmod -R +x /usr/local/bin/docker
 RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
