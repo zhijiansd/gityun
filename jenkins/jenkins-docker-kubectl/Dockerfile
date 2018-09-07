@@ -4,11 +4,12 @@ ADD sources.list /etc/apt/sources.list
 RUN curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg |  apt-key add -
 RUN apt-get update && apt-get install -y git curl docker-ce && rm -rf /var/lib/apt/lists/*
 
-ADD docker-compose /usr/local/bin/docker-compose
-RUN chmod +x /usr/local/bin/docker-compose
-
-ADD kubectl /usr/local/bin/kubectl
-RUN chmod +x /usr/local/bin/kubectl
+ENV DOCKER_COMPOSE_VERSION=1.22.0
+ENV KUBECTL_VERSION=v1.11.1
+RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose \
+    && chmod +x /usr/local/bin/docker-compose
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+    && chmod +x /usr/local/bin/kubectl
 
 ARG user=jenkins
 ARG group=jenkins
