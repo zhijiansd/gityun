@@ -1,16 +1,6 @@
 FROM openjdk:8-jre
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
-ENV DOCKER_VERSION=18.06.1-ce
-ENV DOCKER_COMPOSE_VERSION=1.22.0
-ENV KUBECTL_VERSION=v1.11.1
-RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz -o docker-${DOCKER_VERSION}.tgz \
-		&& tar --strip-components=1 -xvzf docker-${DOCKER_VERSION}.tgz -C /usr/local/bin \
-		&& chmod -R 775 /usr/local/bin/docker
-RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose \
-    && chmod 775 /usr/local/bin/docker-compose
-RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
-    && chmod 775 /usr/local/bin/kubectl
 
 ARG user=jenkins
 ARG group=jenkins
@@ -83,11 +73,11 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
 USER ${user}
 
-COPY jenkins-support /usr/local/bin/jenkins-support && chmod 755 /usr/local/bin/jenkins-support
-COPY jenkins.sh /usr/local/bin/jenkins.sh && chmod 755 /usr/local/bin/jenkins.sh
-COPY tini-shim.sh /bin/tini  && chmod 755 /bin/tini
+COPY jenkins-support /usr/local/bin/jenkins-support 
+COPY jenkins.sh /usr/local/bin/jenkins.sh 
+COPY tini-shim.sh /bin/tini  
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
-COPY plugins.sh /usr/local/bin/plugins.sh && chmod 755 /usr/local/bin/plugins.sh
-COPY install-plugins.sh /usr/local/bin/install-plugins.sh && chmod 755 /usr/local/bin/install-plugins.sh
+COPY plugins.sh /usr/local/bin/plugins.sh 
+COPY install-plugins.sh /usr/local/bin/install-plugins.sh 
