@@ -1,0 +1,1 @@
+FROM quay.io/prometheus/node-exporter:v1.0.0-rc.0
