@@ -4,7 +4,7 @@ MAINTAINER  zhijian <wangzhijiansd@qq.com>
 
 WORKDIR /blog
 
-RUN apk --update --no-progress add git \ 
+RUN apt-get install -y --no-install-recommends git \ 
     && npm install -g hexo-cli
 
 RUN hexo init . \
