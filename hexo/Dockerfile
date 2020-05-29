@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:12-alpine
 
 MAINTAINER  zhijian <wangzhijiansd@qq.com>
 
