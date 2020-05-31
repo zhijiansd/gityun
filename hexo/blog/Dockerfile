@@ -20,6 +20,8 @@ RUN hexo init . \
     && npm install --save hexo-abbrlink  \
     && npm install --save hexo-filter-mermaid-diagrams
 
-VOLUME ["/blog"]
+VOLUME ["/blog", "/blog/themes", "/blog/_config.yml"]
 
 EXPOSE 4000
+
+CMD ["hexo", "server"]
