@@ -21,7 +21,7 @@ RUN hexo init . \
     && npm install --save hexo-filter-mermaid-diagrams
 
 COPY _config.yml .
-COPY next themes/
+COPY themes/next themes/
 
 VOLUME ["/blog"]
 
