@@ -1,1 +1,1 @@
-FROM drone/drone:2.6.0
+FROM drone/drone:2.24.0
